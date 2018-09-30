@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">OurChurch</string>
+
+    <string name="navigation_drawer_open">Abrindo a gaveta de navegação</string>
+    <string name="navigation_drawer_close">Fechando a gaveta de navegação</string>
+
+    <string name="open_google_maps">Abrir no Google Maps</string>
+
+
+    <string name="action_settings">Configurações</string>
+
+    <string name="action_restart">Reiniciar</string>
+
+</resources>

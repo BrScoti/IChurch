@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "439805124277",
+    "firebase_url": "https://ichurch-22adb.firebaseio.com",
+    "project_id": "ichurch-22adb",
+    "storage_bucket": "ichurch-22adb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439805124277:android:ec7fc1c7c61b74ae",
+        "android_client_info": {
+          "package_name": "com.example.aluno.ichurch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439805124277-v4lamkrlbgrnj5329ujbolkalcb34h6d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aluno.ichurch",
+            "certificate_hash": "0a23717d43efaf3de37e290d860fcba0cc3fca30"
+          }
+        },
+        {
+          "client_id": "439805124277-tfgnnr5t5a86u5trbqbh34ku7vugmnfj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFHGaFOLcQtaFKbyvEHLcN9oScY-6X4BE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439805124277-tfgnnr5t5a86u5trbqbh34ku7vugmnfj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
