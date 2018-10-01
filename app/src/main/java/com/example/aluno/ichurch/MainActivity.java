@@ -13,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,6 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aluno.ichurch.Model.MyPlaces;
@@ -46,6 +49,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+
+import com.firebase.ui.auth.AuthUI;
+
+
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,8 +77,11 @@ public class MainActivity extends AppCompatActivity
     protected  double latitude, longitude;
 
     protected IGoogleAPIService mService;
+    private FirebaseAuth mAuth;
+    private Button btnLogin,btnLogout;
+    private TextView userName,userEmail;
 
-
+    private View userLayout;
 
 
     private MyPlaces currentPlace;
@@ -97,7 +109,16 @@ public class MainActivity extends AppCompatActivity
             if (mLocationPermissionsGranted) {
 
                 initMap();
+                mAuth=FirebaseAuth.getInstance();
+                userLayout=findViewById(R.id.userLayout);
+                btnLogin= findViewById(R.id.buttonLogin);
+                userName= findViewById(R.id.userName);
+                userEmail=findViewById(R.id.userEmail);
 
+                if(mAuth.getCurrentUser()!=null){
+                    Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG).show();
+                    // loginSucess();
+                }
 
             }
         }
@@ -327,8 +348,79 @@ public class MainActivity extends AppCompatActivity
     }
         public void login(View view) {
         Log.d("login", "Iniciando Login");
+        Toast.makeText(getApplicationContext(),"Iniciando Login",Toast.LENGTH_SHORT).show();
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .build(),
+                        123
+                );
+            } else {
+                Log.d("TESTE",FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                Toast.makeText(this,
+                        "Bem vindo(a) " + FirebaseAuth.getInstance()
+                                .getCurrentUser()
+                                .getDisplayName(),
+                        Toast.LENGTH_LONG)
+                        .show();
+
+
+            }
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 123) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this,
+                        "Login bem sucedido!",
+                        Toast.LENGTH_LONG)
+                        .show();
+              //  loginSucess();
+
+            } else {
+                Toast.makeText(this,
+                        "Erro de login.",
+                        Toast.LENGTH_LONG)
+                        .show();
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+
+                finish();
+            }
+        }
+    }
+
+    public void logOut(View v){
+        if (v.getId() == btnLogout.getId()) {
+            AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // user is now signed out
+                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+
+                            finish();
+                        }
+                    });
+        }
+    }
+    public void loginSucess(){
+        Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG);
+
+        btnLogin.setVisibility(View.INVISIBLE);
+
+        //String t=mAuth.getCurrentUser()+"";
+    /*
+        userLayout.setVisibility(View.VISIBLE);
+        userName.setText(""+mAuth.getCurrentUser().getDisplayName());
+        userEmail.setText(""+mAuth.getCurrentUser().getEmail());
+      */
+    }
+
+
     //Utilizando Retrofit faz a pesquisa dos locais
     public void nearbyPlaces(final double  lat, final double  lng){
         String url= getUrl(lat,lng);

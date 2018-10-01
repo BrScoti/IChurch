@@ -10,5 +10,6 @@
     <string name="action_settings">Configurações</string>
 
     <string name="action_restart">Reiniciar</string>
+    <string name="signIn">Cadastrar/Entrar</string>
 
 </resources>

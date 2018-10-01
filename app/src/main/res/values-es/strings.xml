@@ -11,5 +11,6 @@
 
 
     <string name="action_restart">Reiniciar</string>
+    <string name="signIn">Cadastrar/Entrar</string>
 
 </resources>
