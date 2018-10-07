@@ -11,5 +11,7 @@
 
     <string name="action_restart">Restart</string>
     <string name="signIn">Sign Up/Login</string>
+    <string name="signout">Sign Out</string>
+    <string name="show_hours">Schedules</string>
 
 </resources>

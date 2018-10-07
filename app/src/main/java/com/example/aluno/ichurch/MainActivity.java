@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
         getLocationPermission();
         if (isServiceOK()) {
             mService = Common.getGoogleAPIService();
@@ -110,14 +112,10 @@ public class MainActivity extends AppCompatActivity
 
                 initMap();
                 mAuth=FirebaseAuth.getInstance();
-                userLayout=findViewById(R.id.userLayout);
-                btnLogin= findViewById(R.id.buttonLogin);
-                userName= findViewById(R.id.userName);
-                userEmail=findViewById(R.id.userEmail);
 
                 if(mAuth.getCurrentUser()!=null){
                     Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG).show();
-                    // loginSucess();
+                     loginSucess();
                 }
 
             }
@@ -221,6 +219,10 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < navigationView.getMenu().size(); i++) {
             navigationView.getMenu().getItem(i).setVisible(false);
         }
+        userName= findViewById(R.id.userName);
+        userEmail= findViewById(R.id.userEmail);
+        userLayout=findViewById(R.id.userLayout);
+
     }
 
 
@@ -236,6 +238,8 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        btnLogin = findViewById(R.id.btnLogin);
+
         mMap = googleMap;
         if (mLocationPermissionsGranted) {
             getDeviceLocation();
@@ -303,7 +307,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private GetLocation getLocation;
 
 
     //Recebe o local do usuário
@@ -346,7 +349,7 @@ public class MainActivity extends AppCompatActivity
         mMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
 
     }
-        public void login(View view) {
+        public void logIn(View view) {
         Log.d("login", "Iniciando Login");
         Toast.makeText(getApplicationContext(),"Iniciando Login",Toast.LENGTH_SHORT).show();
             if (FirebaseAuth.getInstance().getCurrentUser() == null) {
@@ -364,6 +367,9 @@ public class MainActivity extends AppCompatActivity
                                 .getDisplayName(),
                         Toast.LENGTH_LONG)
                         .show();
+                mAuth=FirebaseAuth.getInstance();
+
+                loginSucess();
 
 
             }
@@ -374,12 +380,15 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 123) {
+            Toast.makeText(getApplicationContext(),requestCode+"",Toast.LENGTH_LONG).show();
             if (resultCode == RESULT_OK) {
                 Toast.makeText(this,
                         "Login bem sucedido!",
                         Toast.LENGTH_LONG)
                         .show();
-              //  loginSucess();
+                mAuth=FirebaseAuth.getInstance();
+
+                loginSucess();
 
             } else {
                 Toast.makeText(this,
@@ -394,30 +403,37 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void logOut(View v){
-        if (v.getId() == btnLogout.getId()) {
+        if (v.getId() == R.id.btnLogOut) {
             AuthUI.getInstance()
                     .signOut(this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         public void onComplete(@NonNull Task<Void> task) {
                             // user is now signed out
-                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                            logoutSucess();
 
-                            finish();
                         }
                     });
         }
     }
     public void loginSucess(){
-        Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG);
+        mAuth=FirebaseAuth.getInstance();
 
-        btnLogin.setVisibility(View.INVISIBLE);
+        //Toast.makeText(getApplicationContext(),btnLogin+"",Toast.LENGTH_LONG).show();
 
-        //String t=mAuth.getCurrentUser()+"";
-    /*
-        userLayout.setVisibility(View.VISIBLE);
-        userName.setText(""+mAuth.getCurrentUser().getDisplayName());
-        userEmail.setText(""+mAuth.getCurrentUser().getEmail());
-      */
+            //  btnLogin.setVisibility(View.INVISIBLE);
+
+            //String t=mAuth.getCurrentUser()+"";
+            userLayout.setVisibility(View.VISIBLE);
+            userName.setText("" + mAuth.getCurrentUser().getDisplayName());
+            userEmail.setText("" + mAuth.getCurrentUser().getEmail());
+           btnLogin.setVisibility(View.INVISIBLE);
+            //Toast.makeText(getApplicationContext(),btnLogin+"",Toast.LENGTH_LONG).show();
+    }
+    public void logoutSucess(){
+            userLayout.setVisibility(View.INVISIBLE);
+            userName.setText("");
+            userEmail.setText("");
+             btnLogin.setVisibility(View.VISIBLE);
     }
 
 

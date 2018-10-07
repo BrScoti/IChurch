@@ -11,5 +11,7 @@
 
     <string name="action_restart">Reiniciar</string>
     <string name="signIn">Cadastrar/Entrar</string>
+    <string name="signout">Sair</string>
+    <string name="show_hours">Horários</string>
 
 </resources>
