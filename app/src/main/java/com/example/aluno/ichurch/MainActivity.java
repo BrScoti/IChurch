@@ -114,8 +114,8 @@ public class MainActivity extends AppCompatActivity
                 mAuth=FirebaseAuth.getInstance();
 
                 if(mAuth.getCurrentUser()!=null){
-                   // Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG).show();
-                     loginSucess();
+                   Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG).show();
+                    // loginSucess();
                 }
 
             }
