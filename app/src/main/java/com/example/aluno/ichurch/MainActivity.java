@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity
                 mAuth=FirebaseAuth.getInstance();
 
                 if(mAuth.getCurrentUser()!=null){
-                    Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG).show();
                      loginSucess();
                 }
 
@@ -219,9 +219,7 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < navigationView.getMenu().size(); i++) {
             navigationView.getMenu().getItem(i).setVisible(false);
         }
-        userName= findViewById(R.id.userName);
-        userEmail= findViewById(R.id.userEmail);
-        userLayout=findViewById(R.id.userLayout);
+
 
     }
 
@@ -238,7 +236,6 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        btnLogin = findViewById(R.id.btnLogin);
 
         mMap = googleMap;
         if (mLocationPermissionsGranted) {
@@ -351,7 +348,7 @@ public class MainActivity extends AppCompatActivity
     }
         public void logIn(View view) {
         Log.d("login", "Iniciando Login");
-        Toast.makeText(getApplicationContext(),"Iniciando Login",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(),"Iniciando Login",Toast.LENGTH_SHORT).show();
             if (FirebaseAuth.getInstance().getCurrentUser() == null) {
                 startActivityForResult(
                         AuthUI.getInstance()
@@ -380,14 +377,10 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 123) {
-            Toast.makeText(getApplicationContext(),requestCode+"",Toast.LENGTH_LONG).show();
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this,
-                        "Login bem sucedido!",
-                        Toast.LENGTH_LONG)
-                        .show();
+                //Toast.makeText(this,"Login bem sucedido!",Toast.LENGTH_LONG).show();
                 mAuth=FirebaseAuth.getInstance();
-
+                //Toast.makeText(getApplicationContext(),mAuth+"",Toast.LENGTH_LONG).show();
                 loginSucess();
 
             } else {
@@ -395,10 +388,9 @@ public class MainActivity extends AppCompatActivity
                         "Erro de login.",
                         Toast.LENGTH_LONG)
                         .show();
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
 
-                finish();
-            }
+
+                }
         }
     }
 
@@ -417,16 +409,21 @@ public class MainActivity extends AppCompatActivity
     }
     public void loginSucess(){
         mAuth=FirebaseAuth.getInstance();
-
+        userLayout=findViewById(R.id.userLayout);
+        btnLogin=findViewById(R.id.btnLogin);
+        userName=findViewById(R.id.userName);
+        userEmail=findViewById(R.id.userEmail);
+        //Toast.makeText(getApplicationContext(),"User layout"+userLayout,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"Btn Login"+btnLogin,Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(),btnLogin+"",Toast.LENGTH_LONG).show();
 
-            //  btnLogin.setVisibility(View.INVISIBLE);
+            btnLogin.setVisibility(View.INVISIBLE);
 
             //String t=mAuth.getCurrentUser()+"";
-            userLayout.setVisibility(View.VISIBLE);
-            userName.setText("" + mAuth.getCurrentUser().getDisplayName());
-            userEmail.setText("" + mAuth.getCurrentUser().getEmail());
-           btnLogin.setVisibility(View.INVISIBLE);
+          userLayout.setVisibility(View.VISIBLE);
+          userName.setText("" + FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+          userEmail.setText("" + FirebaseAuth.getInstance().getCurrentUser().getEmail());
+           //btnLogin.setVisibility(View.INVISIBLE);
             //Toast.makeText(getApplicationContext(),btnLogin+"",Toast.LENGTH_LONG).show();
     }
     public void logoutSucess(){
