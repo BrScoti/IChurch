@@ -14,5 +14,6 @@
     <string name="signIn">Cadastrar/Entrar</string>
     <string name="signout">Sair</string>
     <string name="show_hours">Horários</string>
+    <string name="btn_insert_hours">Cadastrar Horários</string>
 
 </resources>

@@ -13,5 +13,6 @@
     <string name="signIn">Sign Up/Login</string>
     <string name="signout">Sign Out</string>
     <string name="show_hours">Schedules</string>
+    <string name="btn_insert_hours">Insert Hours</string>
 
 </resources>

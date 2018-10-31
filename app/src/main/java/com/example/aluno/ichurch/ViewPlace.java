@@ -27,7 +27,7 @@ public class ViewPlace extends AppCompatActivity {
         ImageView photo;
         RatingBar ratingBar;
         TextView churchName, churchAddress, churchOpenHour,churchPhoneNumber;
-        Button btnShowInMap;
+        Button btnShowInMap,btnShowHours;
         IGoogleAPIService mService;
 
         PlaceDetail mChurch;
@@ -41,6 +41,7 @@ public class ViewPlace extends AppCompatActivity {
         mService= Common.getGoogleAPIService();
         ratingBar=(RatingBar) findViewById(R.id.ratingBar);
         btnShowInMap= (Button) findViewById(R.id.btn_show_map);
+        btnShowHours= (Button) findViewById(R.id.btn_show_hours);
         churchName= (TextView) findViewById(R.id.church_name);
         churchAddress= (TextView) findViewById(R.id.church_address);
         churchOpenHour= (TextView) findViewById(R.id.church_open_hour);
@@ -75,6 +76,14 @@ public class ViewPlace extends AppCompatActivity {
 
         }
 
+        //Abrir horários
+        btnShowHours.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),ViewPlaceHours.class));
+
+            }
+        });
         //Rating Bar
         /*
         if(Common.currentResult.getRating() != null && !TextUtils.isEmpty(Common.currentResult.getRating())){
