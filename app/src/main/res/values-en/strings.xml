@@ -14,5 +14,11 @@
     <string name="signout">Sign Out</string>
     <string name="show_hours">Schedules</string>
     <string name="btn_insert_hours">Insert Hours</string>
+    <string name="mass_schedules">Mass Schedules</string>
+    <string name="confession_schedules">Confession Schedules</string>
+    <string name="other_schedules">Other Schedules</string>
+    <string name="btnRegisterSchedules">Register</string>
+    <string name="OtherDescription">"Enter a time along with a description "</string>
+    <string name="schedules_sure">Enter the schedules that you are sure</string>
 
 </resources>

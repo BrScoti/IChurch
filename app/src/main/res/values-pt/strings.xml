@@ -14,5 +14,11 @@
     <string name="signout">Sair</string>
     <string name="show_hours">Horários</string>
     <string name="btn_insert_hours">Cadastrar Horários</string>
+    <string name="mass_schedules">Horários de Missas</string>
+    <string name="confession_schedules">Horários de Confissão</string>
+    <string name="other_schedules">Outros Horários</string>
+    <string name="btnRegisterSchedules">Registrar</string>
+    <string name="OtherDescription">"Insira um horário juntamente com uma descrição "</string>
+    <string name="schedules_sure">"Insira os horários que você tenha a certeza "</string>
 
 </resources>

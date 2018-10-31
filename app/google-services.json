@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "439805124277-sdv54oh5e1uq0a8c87mtnkbkvslcr3o7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aluno.ichurch",
+            "certificate_hash": "0b4a3da1682e0f8b0bd39a90de05c4b07f647b63"
+          }
+        },
+        {
           "client_id": "439805124277-tfgnnr5t5a86u5trbqbh34ku7vugmnfj.apps.googleusercontent.com",
           "client_type": 3
         }
