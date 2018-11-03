@@ -49,7 +49,7 @@ public class ViewPlaceHours extends AppCompatActivity {
 
         //View para listar os horários
         viewListarHorários= findViewById(R.id.layoutListarHorários);
-               
+
             if (mAuth.getCurrentUser() != null) {
 
                 listarHorarios();
