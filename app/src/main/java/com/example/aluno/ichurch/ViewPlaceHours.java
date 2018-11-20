@@ -173,12 +173,12 @@ public class ViewPlaceHours extends AppCompatActivity {
                 if( o.getSchedules_confession() != null){
                     listViewListConfession.setText(o.getSchedules_confession());
                 }else{
-                    listViewListMass.setText("Nenhum horário cadastrado");
+                    listViewListConfession.setText("Nenhum horário cadastrado");
                 }
                 if( o.getSchedules_other() != null){
                     listViewListOther.setText(o.getSchedules_other());
                 }else{
-                    listViewListMass.setText("Nenhum horário cadastrado");
+                    listViewListOther.setText("Nenhum horário cadastrado");
                 }
 
             }
@@ -187,17 +187,22 @@ public class ViewPlaceHours extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 System.out.println(error);
-                Toast.makeText(getApplicationContext(), "Nenhum horário cadastrado", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Nenhum horário cadastrado", Toast.LENGTH_LONG).show();
                 btnCadastrarHorários.setVisibility(View.VISIBLE);
                 viewListarHorários.setVisibility(View.GONE);
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
     public void setViewCadastrarHorarios(View v){
         System.out.println(church);
         System.out.println(database.getReference());
         if (mAuth.getCurrentUser() != null) {
+
 
             if(isCadastrado){
                 listarHorarios();

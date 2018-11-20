@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.constraint.Group;
 import android.support.design.widget.FloatingActionButton;
@@ -82,9 +83,26 @@ public class MainActivity extends AppCompatActivity
     private TextView userName,userEmail;
 
     private View userLayout;
-
+    private boolean logado;
 
     private MyPlaces currentPlace;
+
+    @Override
+    protected void onResume(){
+            super.onResume();
+
+        mAuth=FirebaseAuth.getInstance();
+
+        // System.out.println("/"+userLayout+"/"+btnLogin+"/"+userName+"/"+userEmail);
+
+        if(mAuth.getCurrentUser()!=null && logado==false){
+            Handler h = new Handler();
+            h.postDelayed(r, 500);
+
+
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +120,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        logado=false;
 
         getLocationPermission();
         if (isServiceOK()) {
@@ -114,8 +132,9 @@ public class MainActivity extends AppCompatActivity
                 mAuth=FirebaseAuth.getInstance();
 
                 if(mAuth.getCurrentUser()!=null){
-                   Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG).show();
+                   //Toast.makeText(getApplicationContext(),"OPA",Toast.LENGTH_LONG).show();
                     // loginSucess();
+
                 }
 
             }
@@ -162,7 +181,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         return true;
     }
 
@@ -172,6 +190,8 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -220,8 +240,32 @@ public class MainActivity extends AppCompatActivity
             navigationView.getMenu().getItem(i).setVisible(false);
         }
 
+        /*
+        mAuth=FirebaseAuth.getInstance();
+
+        if(mAuth.getCurrentUser()!=null){
+
+            Handler h = new Handler();
+            h.postDelayed(r, 500);
+
+        }*/
 
     }
+
+    Runnable r = new Runnable() {
+        @Override
+        public void run(){
+            /*if(logado==false){
+                Toast.makeText(getApplicationContext(),"Seja bem vindo, "+ mAuth.getCurrentUser().getDisplayName(),Toast.LENGTH_LONG).show();
+
+            }*/
+
+            logado=true;
+            loginSucess();
+
+
+        }
+    };
 
 
 
@@ -408,6 +452,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
     public void loginSucess(){
+
+        logado=true;
         mAuth=FirebaseAuth.getInstance();
         userLayout=findViewById(R.id.userLayout);
         btnLogin=findViewById(R.id.btnLogin);
@@ -421,9 +467,10 @@ public class MainActivity extends AppCompatActivity
 
             //String t=mAuth.getCurrentUser()+"";
           userLayout.setVisibility(View.VISIBLE);
-          userName.setText("" + FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-          userEmail.setText("" + FirebaseAuth.getInstance().getCurrentUser().getEmail());
-           //btnLogin.setVisibility(View.INVISIBLE);
+          userName.setText("" + mAuth.getCurrentUser().getDisplayName());
+          userEmail.setText("" + mAuth.getCurrentUser().getEmail());
+
+        //btnLogin.setVisibility(View.INVISIBLE);
             //Toast.makeText(getApplicationContext(),btnLogin+"",Toast.LENGTH_LONG).show();
     }
     public void logoutSucess(){

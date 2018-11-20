@@ -33,6 +33,7 @@ public class InsertPlaceHours extends AppCompatActivity {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference church = database.getReference(Common.currentResult.getId());
                     church.child("user").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
                     if (!editTextMass.getText().toString().isEmpty()) {
                         church.child("schedules-mass").setValue("" + editTextMass.getText());
 
@@ -54,5 +55,9 @@ public class InsertPlaceHours extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
 }
